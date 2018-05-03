@@ -1,14 +1,17 @@
-from glo import scr
 import curses
+from glo import scr
+from key_listern import KeyListern
 
-class Widget(object):
-    def __init__(self, parent, size, pos=None, can_focus=False):
+
+class Widget(KeyListern):
+    _selectable = False
+
+    def __init__(self, parent, size, pos=None):
         super(Widget, self).__init__()
         self.w = size[0]
         self.h = size[1]
         self.parent = parent
         self.widgets = []
-        self.can_focus = can_focus
         if pos:
             self.x = pos[0]
             self.y = pos[1]
@@ -16,12 +19,12 @@ class Widget(object):
             self.x = 0
             self.y = 0
         if not parent:
-            self.win = curses.newwin(self.h, self.w, self.y, self.x)
+            self._win = curses.newwin(self.h, self.w, self.y, self.x)
         else:
-            self.parent.win.derwin(self.h, self.w, self.y, self.x)
+            self._win = self.parent._win.derwin(self.h, self.w, self.y, self.x)
 
 
-    def add_widget(self, widget):
+    def add(self, widget):
         self.widgets.append(widget)
 
     def get_focus(self):
@@ -30,12 +33,14 @@ class Widget(object):
     def lose_focus(self):
         pass
 
-    def bind(self, action, widget, callback):
-        print "widget: %s, action: %s, callback: %s " % (widget, action, callback)
-
-    def key_listern(self):
-        pass
-
     def show(self):
         raise NotImplementedError()
+
+    def hide(self):
+        # TODO: how to implete hide
+        return
+        raise NotImplementedError()
+
+    def selectable(self):
+        return self._selectable
 

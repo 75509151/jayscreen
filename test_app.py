@@ -1,7 +1,20 @@
 from app import App
-from widget import Widget
+from form import Form
+from button import Button
+import pudb
+
+class TestForm(Form):
+
+    def __init__(self, size=(50, 60)):
+        super(TestForm, self).__init__(None, size=size)
+
+        btn = Button(self, "nihao", pos=(1, 5))
+        self.add(btn)
 
 if __name__ == "__main__":
     app = App()
-    a = Widget(None, size=(10, 20))
+    f = TestForm()
+    f.show()
+
+
     app.main_loop()
