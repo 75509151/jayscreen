@@ -15,6 +15,10 @@ class Button(Widget):
         self.name = name
 
     def show(self):
+        super(Button, self).show()
         self._win.box()
         self._win.insstr(1,1, self.name)
 
+    def hide(self):
+        self._win.clear()
+        self._win.refresh()

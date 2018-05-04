@@ -1,0 +1,4 @@
+
+
+NO_STYLE = 0x00
+HAS_BOX = 0x01
