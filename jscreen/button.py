@@ -14,11 +14,15 @@ class Button(Widget):
 
         self.name = name
 
-    def show(self):
-        super(Button, self).show()
+    def render(self):
         self._win.box()
         self._win.insstr(1,1, self.name)
 
-    def hide(self):
-        self._win.clear()
+    def get_focus(self):
+        curses.curs_set(0)
         self._win.refresh()
+
+    def lose_focus(self):
+        curses.curs_set(1)
+        self._win.refresh()
+

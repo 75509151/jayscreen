@@ -14,8 +14,8 @@ class StaticText(Widget):
         super(StaticText, self).__init__(parent, size, pos)
         self.text = text
 
-    def show(self):
-        super(StaticText, self).show()
+    def render(self):
+        self.__render_style__()
         self._win.insstr(1, 1, self.text)
 
 
@@ -24,4 +24,4 @@ class Text(StaticText):
 
     def __init__(self, parent, text="", size=None, pos=None,
                  style=styles.NO_STYLE):
-        super(Text, self).__init__(parent, size, pos)
+        super(Text, self).__init__(parent, text, size, pos)

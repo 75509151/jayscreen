@@ -1,5 +1,4 @@
 import curses
-from glo import scr
 from key_listern import KeyListern
 import styles
 
@@ -13,7 +12,7 @@ class Widget(KeyListern):
         self.parent = parent
         self.style = style
         self.widgets = []
-        self._hide = True
+        self._hide = False
         if pos:
             self.x = pos[0]
             self.y = pos[1]
@@ -34,12 +33,18 @@ class Widget(KeyListern):
     def lose_focus(self):
         pass
 
-    def _show_according_style(self):
+    def __render_style__(self):
         if self.style & styles.HAS_BOX:
             self._win.box()
 
+    def render(self):
+        raise NotImplementedError()
+
     def show(self):
         self._hide = False
+        self._win.clear()
+        self.render()
+        self._win.refresh()
 
     def hide(self):
         if self._hide:

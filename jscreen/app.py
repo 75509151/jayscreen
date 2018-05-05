@@ -1,11 +1,15 @@
 import curses
 import time
-from glo import scr
-
+import glo
 
 class App(object):
+    SCR = curses.initscr()
+
     def __init__(self):
-        scr.refresh()
+        self.exit = False
+        self.active_form = None
+
+        self.SCR.refresh()
         curses.start_color()
         # curses.init_pair(1, curses.COLOR_BLACK)
         # curses.init_color(2, curses.COLOR_WHITE)
@@ -16,9 +20,12 @@ class App(object):
         curses.noecho()
         curses.cbreak()
 
+        glo.glo_app = self
+
     def main_loop(self):
-        while True:
+        while not self.exit:
             time.sleep(1)
+
 
 
 if __name__ == "__main__":
