@@ -1,9 +1,9 @@
+import time
+import pudb
 from jscreen.app import App
 from jscreen.text import Text
 from jscreen.form import Form
 from jscreen.button import Button
-import pudb
-import time
 
 class TestForm(Form):
 
@@ -15,28 +15,19 @@ class TestForm(Form):
         btn = Text(self, text="text", pos=(20, 15), size =(10, 10))
         self.add(btn)
 
+
 if __name__ == "__main__":
+    # pudb.set_trace()
     app = App()
     f = TestForm()
     f.show()
 
-    time.sleep(2)
-    f.hide()
-    time.sleep(2)
-    f.show()
-    f.btn.get_focus()
+    f.display()
+    while True:
+        ch = f._win.getch()
+        f.key_listen(ch)
 
-
+    # ch = curses.get
     app.main_loop()
 
-if __name__ == "__main__":
-    app = App()
-    f = TestForm()
-    f.show()
 
-    time.sleep(2)
-    f.hide()
-
-
-
-    app.main_loop()

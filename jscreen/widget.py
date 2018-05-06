@@ -7,6 +7,7 @@ class Widget(KeyListern):
 
     def __init__(self, parent, size, pos=None, style=styles.NO_STYLE):
         super(Widget, self).__init__()
+        self.setup_key_handlers()
         self.w = size[0]
         self.h = size[1]
         self.parent = parent
@@ -26,6 +27,12 @@ class Widget(KeyListern):
 
     def add(self, widget):
         self.widgets.append(widget)
+
+    def hided(self):
+        return self._hide
+
+    def selectable(self):
+        return self._selectable
 
     def get_focus(self):
         pass

@@ -19,6 +19,7 @@ class StaticText(Widget):
         self._win.insstr(1, 1, self.text)
 
 
+
 class Text(StaticText):
     _selectable = True
 
