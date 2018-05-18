@@ -2,12 +2,12 @@ import curses
 from key_listern import KeyListern
 import styles
 
-class Widget(KeyListern):
+
+class BaseWidget(object):
     _selectable = False
 
     def __init__(self, parent, size, pos=None, style=styles.NO_STYLE):
-        super(Widget, self).__init__()
-        self.setup_key_handlers()
+        super(BaseWidget, self).__init__()
         self.w = size[0]
         self.h = size[1]
         self.parent = parent
@@ -47,6 +47,13 @@ class Widget(KeyListern):
     def render(self):
         raise NotImplementedError()
 
+
+class ActionWidget(KeyListern):
+
+    def __init__(self, parent, size, pos=None, style=styles.NO_STYLE):
+        super(ActionWidget, self).__init__()
+        self.setup_key_handlers()
+
     def show(self):
         self._hide = False
         self._win.clear()
@@ -63,6 +70,3 @@ class Widget(KeyListern):
             widget.hide()
             widget._win.refresh()
         self._win.refresh()
-
-    def selectable(self):
-        return self._selectable

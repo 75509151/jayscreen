@@ -16,19 +16,12 @@ class Form(Widget):
             widget.show()
 
     def set_focus(self, widget):
-        if widget._selectable:
+        if widget.selectable():
             widget.get_focus()
-            return True
-        return False
+            return
+        raise Exception("can not get_focus")
 
     def _set_first_focus(self):
         for w in self.widgets:
             if not w.hided() and w.selectable():
                 w.get_focus()
-
-
-    def display(self):
-        self._set_first_focus()
-
-
-
